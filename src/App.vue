@@ -1,32 +1,79 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+       <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <div
+              class="d-flex align-center"
+              @click="gotToMainMenu"
+              v-bind="attrs"
+              v-on="on"
+            >
+              <!-- <v-img
+                alt="World app Logo"
+                class="shrink mr-2"
+                contain
+                src="@/assets/world-country.svg"
+                transition="scale-transition"
+                width="50"
+              /> -->
+            <div class="shrink mt-1 hidden-xs-and-down">
+              <h3>Memory Game</h3>
+            </div>
+          </div>
+        </template>
+         <span>Go to the Main Board page</span>
+       </v-tooltip>
+      <v-spacer></v-spacer>
+
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            @click="gotToInstructionMenu"
+            text
+            v-bind="attrs"
+            v-on="on"
+          >
+            <span>Instructions</span>
+          </v-btn>
+        </template>
+         <span>Go to the Instructions page</span>
+      </v-tooltip>
+
+      <v-btn @click="goToAbout" text>
+        <span>About</span>
+      </v-btn>
+
+      <v-btn href="https://github.com/diasor/geo-demo/releases/latest" target="_blank" text>
+        <span class="shrink hidden-sm-and-down mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+export default {
+  name: "App",
 
-#nav {
-  padding: 30px;
+  methods: {
+    gotToMainMenu () {
+      this.$router.push({ path: "/" })
+    },
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+    gotToInstructionMenu () {
+      this.$router.push({ path: "/instructions" })
+    },
 
-    &.router-link-exact-active {
-      color: #42b983;
+    goToAbout () {
+      this.$router.push({ path: "/about" })
     }
   }
 }
-</style>
+</script>

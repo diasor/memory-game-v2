@@ -1,18 +1,89 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="memory-page">
+    <header>
+      <ul class="skip-links">
+        <li>
+          <a href="#main" ref="skipLink">Skip to main content</a>
+        </li>
+      </ul>
+      <!-- <h1 class="title">Memory Game</h1> -->
+    </header>
+    <p role="status">{{ routeAccessibilityMessage }}</p>
+    <game-board />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mapState, mapActions } from "vuex"
+import GameBoard from "../components/Game/GameBoard.vue"
 
 export default {
-  name: 'Home',
+  name: "Home",
+
   components: {
-    HelloWorld
+    GameBoard
+  },
+
+  computed: {
+    ...mapState(["routeAccessibilityMessage"])
+  },
+
+  watch: {
+    // watching the route changes to provide proper accessibility message
+    $route: function () {
+      this.$refs.skipLink.focus()
+      this.announceRoute({ message: this.$route.name + " page loaded" })
+
+      this.$nextTick(function () {
+        const navLinks = this.$refs.nav
+        navLinks.querySelectorAll("[aria-current]").forEach(current => {
+          current.removeAttribute("aria-current")
+        })
+
+        navLinks
+          .querySelectorAll(".router-link-exact-active")
+          .forEach(current => {
+            current.setAttribute("aria-current", "page")
+          })
+      })
+    }
+  },
+
+  methods: {
+    ...mapActions(["updateRouteAccessibilityMessage"]),
+
+    announceRoute (message) {
+      this.updateRouteAccessibilityMessage(message)
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  // Skip to Main
+  .skip-links {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+
+    a {
+      // background: #0e4b5a url(/img/fabric.5959b418.png);
+      background-blend-mode: color-burn;
+      display: block;
+      opacity: 0;
+      font-size: 1em;
+      font-weight: bold;
+
+      &:focus {
+        opacity: 1;
+        padding: 1em;
+      }
+
+      &:visited {
+        color: white;
+      }
+    }
+  }
+</style>
