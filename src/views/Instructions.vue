@@ -1,40 +1,66 @@
 <template>
-  <div>
     <main class="main-instruction" id="main" tabindex="-1" aria-labelledby="instructionsTitle">
-      <h2 id="instructionsTitle">Instructions</h2>
-      <section>
-        <h3>Rules</h3>
-        <p>This is a memory Game. The cards are shuffled and faced down. The point of the game is to find all the matches; there are a total of 16 cards to match.</p>
-        <ul class="list-instruct">
-          <li v-for="(instruction, index) in instructions" :key="index">{{instruction}}</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Scoring</h3>
-        <ul class="list-instruct">
-          <li v-for="(score, index) in scores" :key="index">
-            <p class="star-category">{{score.value}} Stars</p>
-            <span>{{score.description}}</span>
-          </li>
-        </ul>
-      </section>
+      <v-card flat>
+        <v-card-title id="instructionsTitle">Instructions</v-card-title>
+        <v-divider class="ma-0"></v-divider>
+
+        <v-card-text>
+          Playing is very simple:
+          <v-list flat>
+            <v-subheader>Rules</v-subheader>
+              <v-list-item
+                v-for="(instruction, index) in instructions"
+                :key="index"
+              >
+                <v-list-item-icon>
+                  <v-icon v-text="instruction.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="instruction.text"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+          </v-list>
+
+          <v-list>
+            <v-list-item>
+              <v-list-item-content
+                v-for="(score, index) in scores"
+                :key="index"
+              >
+                <v-list-item-title>Scoring</v-list-item-title>
+                <v-list-item-subtitle>
+                  {{score.value}}
+                      <v-icon
+                        center
+                        color="#827717"
+                      >
+                        fa-star
+                      </v-icon>
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+
+      </v-card>
     </main>
-  </div>
 </template>
 
 <script>
 export default {
   name: "Instructions",
+
   data () {
     return {
       instructions: [
-        "Click on a card to flip it over.",
-        "If the two cards match, they will remain flipped.",
-        "If they don't match, they will be turned over.",
-        "Remember what was on each card and where it was.",
-        "The game is over when all the cards have been matched.",
-        "Every flipped card counts as a move."
+        { text: "Click on a card to flip it over.", icon: "fas fa-hand-pointer" },
+        { text: "If the two cards match, they will remain flipped.", icon: "fas fa-equals" },
+        { text: "If they don't match, they will be turned over.", icon: "fas fa-not-equal" },
+        { text: "Remember what was on each card and where it was.", icon: "far fa-lightbulb-on" },
+        { text: "The game is over when all the cards have been matched.", icon: "fas fa-user-check" },
+        { text: "Every flipped card counts as a move.", icon: "far fa-thumbs-up" }
       ],
+
       scores: [
         { value: 3, description: "Win with 30 moves or less" },
         { value: 2, description: "Win with 40 moves or less" },

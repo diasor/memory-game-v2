@@ -44,7 +44,7 @@
         <span>About</span>
       </v-btn>
 
-      <v-btn href="https://github.com/diasor/geo-demo/releases/latest" target="_blank" text>
+      <v-btn href="https://github.com/diasor/memory-game-v2" target="_blank" text>
         <span class="shrink hidden-sm-and-down mr-2">Latest Release</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>

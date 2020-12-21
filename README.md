@@ -28,8 +28,12 @@ npm run lint
 
 This project was originally forked from `https://github.com/mlama007/Vue-Memory-Game`
 
-### Some Improvements
+### How to use it
+If you would like just to test the matching game, just feel free to select a game, and start playing.
 
+If you would like to test its accessibility capabilities, you will need to install some screen reader on Chrome (like for instance ChromeVox or ScreenReader). If you install such a plugin, every time the user clicks on a card, the system will feedback to the user. Check it out.
+
+### Some Improvements
 I made several changes to:
 
 - make a better use of the state management by redefining the state into:
@@ -66,6 +70,7 @@ I made several changes to:
 - <b>added Vuetify</b>:
     - nicer look and feel, color palette, etc.
     - several style changes to allow the use of images on the new templates, as well as some other styles improvements.
+    - responsiveness
 
 - <b>added the feature of an extended templates by theme</b>:
 
@@ -75,6 +80,8 @@ I made several changes to:
   - improved some other previous styles
 
 - added a template for animal icons
+
+For more details, take a look at the "About"section.
 
 ### Solved game
 

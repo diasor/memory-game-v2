@@ -6,7 +6,6 @@
           <a href="#main" ref="skipLink">Skip to main content</a>
         </li>
       </ul>
-      <!-- <h1 class="title">Memory Game</h1> -->
     </header>
     <p role="status">{{ routeAccessibilityMessage }}</p>
     <game-board />
