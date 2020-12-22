@@ -1,6 +1,11 @@
 <template>
   <v-card class="d-flex flex-wrap">
     <v-card-text>
+      This application offers a memory game where the user can find card matches through the randomly
+      displayed cards. What it is interesting about it, is that it also offers WAI-ARIA accessibility
+      that reads to the user the progress of the game.
+    </v-card-text>
+    <v-card-text>
       This application was originally cloned from <a href="https://github.com/mlama007/Vue-Memory-Game" target="_blank">
       this</a> application presented on the Amsterdam Vue conference 2019.
       At that talk I was really impressed with the speaker's approach towars accessibility and vue. How that
@@ -16,12 +21,12 @@
         Furthermore, this application was expanded so not only can the user play with the default icon game,
         but also there are several themes defined, kind of like card decks. There are currently 5:
           <ul>
-            <li> - Default theme (with font awesome icons)</li>
-            <li> - Animals theme (with font awesome animal icons)</li>
-            <li> - Furniture theme (with font awesome furniture icons)</li>
-            <li> - Disney theme (with Disney images)</li>
-            <li> - Harry Potter theme (with Harry Potter images)</li>
-            <li> - Harry Potter extended theme (with many more Harry Potter images)</li>
+            <li> Default theme (with font awesome icons)</li>
+            <li> Animals theme (with font awesome animal icons)</li>
+            <li> Furniture theme (with font awesome furniture icons)</li>
+            <li> Disney theme (with Disney images)</li>
+            <li> Harry Potter theme (with Harry Potter images)</li>
+            <li> Harry Potter extended theme (with many more Harry Potter images)</li>
         </ul>
 
         This for once, made it more interesting (at least for my kids to play).
