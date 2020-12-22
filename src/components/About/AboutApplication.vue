@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card class="d-flex flex-wrap">
     <v-card-text>
       This application was originally cloned from <a href="https://github.com/mlama007/Vue-Memory-Game" target="_blank">
       this</a> application presented on the Amsterdam Vue conference 2019.
@@ -7,9 +7,10 @@
       issue was(is) extremely important and how we can approach it within Vue applications.
       So I cloned the code and I checked it out. After playing with it for a while, I made several improvements
       to it, and this application is the result of that.
+    </v-card-text>
 
-      <v-card-title>Theme extension</v-card-title>
-      <v-card-text>With this application you can still play the original memory game, where
+    <v-card-title>Theme extension</v-card-title>
+    <v-card-text>With this application you can still play the original memory game, where
         the user attempts to find matches between two cards.
 
         Furthermore, this application was expanded so not only can the user play with the default icon game,
@@ -24,7 +25,7 @@
         </ul>
 
         This for once, made it more interesting (at least for my kids to play).
-      </v-card-text>
+    </v-card-text>
 
       <v-card-title>Accessibility</v-card-title>
       <v-card-text>
@@ -64,33 +65,21 @@
           </li>
           <li><b>About:</b> added this About section, with some insights both into the application as well as some details
           about myself.</li>
-      </ul>
+        </ul>
       </v-card-text>
 
-      <v-card-title>Tools & technologies</v-card-title>
-      <v-list>
-        <v-item-group multiple>
-          <v-list-item>
-            <v-item>
-              <v-chip class="mr-2">Vue</v-chip>
-            </v-item>
-            <v-item>
-              <v-chip class="mr-2">Vuex</v-chip>
-            </v-item>
-            <v-item>
-              <v-chip class="mr-2">Vue Router</v-chip>
-            </v-item>
-            <v-item>
-              <v-chip class="mr-2">Vuetify</v-chip>
-            </v-item>
-            <v-item>
-              <v-chip class="mr-2">Accessibility (ARIA)</v-chip>
-            </v-item>
-          </v-list-item>
-        </v-item-group>
-      </v-list>
+    <v-card-title>Tools & technologies</v-card-title>
+    <v-card-text>
+      <v-chip-group
+        column
+        >
+        <v-chip>Vue</v-chip>
+        <v-chip>Vuex</v-chip>
+        <v-chip>Vue Router</v-chip>
+        <v-chip>Vuetify</v-chip>
+        <v-chip>Accessibility (ARIA)</v-chip>
+      </v-chip-group>
     </v-card-text>
-
   </v-card>
 </template>
 

@@ -50,7 +50,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="d-flex flex-wrap">
       <v-container>
         <router-view></router-view>
       </v-container>

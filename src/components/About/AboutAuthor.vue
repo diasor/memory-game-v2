@@ -1,6 +1,6 @@
 <template>
-  <v-card flat class="pa-2">
-    <v-card-text class="mb-0 pb-0">
+  <v-card flat>
+    <v-card-text>
       <p>
         My name is Diana Sormani and I am a Software Engineer with 15 years of experience
         developing software. I am originally from Uruguay! Love my country. Although I'm living in the Netherlands.
@@ -60,15 +60,15 @@
 
 <script>
 export default {
-  name: 'AboutAuthor',
+  name: "AboutAuthor",
 
   methods: {
     goToLinkedin () {
-      window.open('https://www.linkedin.com/in/dianasormani/')
+      window.open("https://www.linkedin.com/in/dianasormani/")
     },
 
     goToGitHub () {
-      window.open('https://github.com/diasor/')
+      window.open("https://github.com/diasor/")
     }
   }
 }
