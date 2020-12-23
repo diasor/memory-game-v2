@@ -79,8 +79,8 @@ export default {
     width: 0 !important;
 
     @media screen and (min-width: 450px) {
-      width: auto !important;
       display: flex !important;
+      width: auto !important;
     }
   }
 

@@ -59,9 +59,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
   #memory-page {
     max-width: 100vw;
+    overflow: hidden;
   }
 
   // Skip to Main

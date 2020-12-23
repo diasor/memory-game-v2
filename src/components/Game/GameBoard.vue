@@ -1,7 +1,6 @@
 <template>
     <v-card
       class="container"
-      min-width="800"
       aria-label="Memory Game Board"
     >
         <p role="status" v-if="gameAccessibilityMessage">
@@ -33,23 +32,21 @@
             />
           </div>
 
-          <!-- <div class="deck-container"> -->
-            <div class="deck-layout">
-              <div
-                v-for="(card, index) in this.deck.cards"
-                 :key="index"
-                class="deck-cards"
-              >
-                <Card
-                  :aria-label="[card.flipped ? card.name : '']"
-                  :card="card"
-                  :index="index"
-                  :extended="extended"
-                  @onFlip="flipThisCard(card, index)"
-                />
-              </div>
+          <div class="deck-layout">
+            <div
+              v-for="(card, index) in this.deck.cards"
+                :key="index"
+              class="deck-cards"
+            >
+              <Card
+                :aria-label="[card.flipped ? card.name : '']"
+                :card="card"
+                :index="index"
+                :extended="extended"
+                @onFlip="flipThisCard(card, index)"
+              />
             </div>
-          <!-- </div> -->
+          </div>
         </main>
     </v-card>
 </template>
@@ -186,13 +183,11 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 0;
-    width: 100vw;
+    // width: 100vw;
   }
 
   main {
-    // display: flex;
-    // flex-direction: column;
-    width: 100vw;
+    max-width: 100vw;
     margin: 0;
     padding: 0;
   }
@@ -205,21 +200,13 @@ export default {
     margin: auto;
   }
 
-  // .deck-container {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   // width: 100%;
-  //   margin: auto;
-  //   background-color: peru;
-  // }
-
   .deck-layout {
     display: grid;
     grid-template-columns: 40% 40%;
-    width: 100vw;
-    margin: auto;
-    padding: auto;
+    max-width: 100% !important;
+    // margin: auto;
+    padding: 0;
+    overflow:hidden !important;
 
       @media screen and (min-width: 450px) {
           margin: auto;
