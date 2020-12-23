@@ -59,6 +59,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  #memory-page {
+    max-width: 100vw;
+  }
   // Skip to Main
   .skip-links {
     margin: 0;
@@ -68,7 +72,6 @@ export default {
     white-space: nowrap;
 
     a {
-      // background: #0e4b5a url(/img/fabric.5959b418.png);
       background-blend-mode: color-burn;
       display: block;
       opacity: 0;

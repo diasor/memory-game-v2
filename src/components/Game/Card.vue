@@ -75,63 +75,84 @@ export default {
 
 <style lang="scss" scoped>
   $icon-size: 50px;
-  $icon-image-size: 125px;
-  $icon-image-small-size: 112px;
+  $card-small-size: 90px;
+  $card-image-medium-size: 112px;
+  $card-size: 125px;
   $icon-background-color: #00695C;
 
   .card {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90px;
-    width: 90px;
+    height: $card-small-size;
+    width: $card-small-size;
     color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-
     &:focus {
       outline: none;
     }
 
-    @media (min-width: 450px) {
-      height: $icon-image-size;
-      width: $icon-image-size;
+    @media screen and (min-width: 450px) {
+      height: $card-size;
+      width: $card-size;
     }
 
     &__svg {
-      max-height: $icon-image-size;
-      max-width: $icon-image-size;
+      height: $card-small-size;
+      width: $card-small-size;
       padding: 0;
       border-radius: 0.5rem;
       background-color: white !important;
+      margin: 0;
+      padding: 0;
+
+      @media screen and (min-width: 450px) {
+          height: $card-size;
+          width: $card-size;
+      }
 
       > img {
-        height: $icon-image-size;
-        width: $icon-image-size;
-        margin: 0;
-        padding: 0;
+        height: $card-small-size;
+        width: $card-small-size;
+        padding: 0.3rem;
         border-radius: 0.5rem;
+
+        @media screen and (min-width: 450px) {
+          height: $card-size;
+          width: $card-size;
+        }
       }
     }
 
     &__extended {
-      height: $icon-image-small-size;
-      width: $icon-image-small-size;
+      height: $card-small-size;
+      width: $card-small-size;
+
+      @media screen and (min-width: 450px) {
+          height: $card-image-medium-size;
+          width: $card-image-medium-size;
+      }
     }
 
     &__svg-extended {
-      height: $icon-image-small-size;
-      width: $icon-image-small-size;
+      height: $card-image-medium-size;
+      width: $card-image-medium-size;
       padding: 0;
       border-radius: 0.5rem;
 
       > img {
-        height: $icon-image-small-size;
-        width: $icon-image-small-size;
+        height: $card-image-medium-size;
+        width: $card-image-medium-size;
         margin: 0;
         padding: 0;
         border-radius: 0.5rem;
+
+        @media screen and (min-width: 450px) {
+          height: $card-size;
+          width: $card-size;
+        }
       }
     }
   }

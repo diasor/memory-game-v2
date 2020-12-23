@@ -9,17 +9,7 @@
               v-bind="attrs"
               v-on="on"
             >
-              <!-- <v-img
-                alt="World app Logo"
-                class="shrink mr-2"
-                contain
-                src="@/assets/world-country.svg"
-                transition="scale-transition"
-                width="50"
-              /> -->
-            <div class="shrink mt-1 hidden-xs-and-down">
-              <h3>Memory Game</h3>
-            </div>
+            <h3>Memory Game</h3>
           </div>
         </template>
          <span>Go to the Main Board page</span>
@@ -34,7 +24,7 @@
             v-bind="attrs"
             v-on="on"
           >
-            <span>Instructions</span>
+            <span class="shrink hidden-sm-and-down mr-2">Instructions</span>
           </v-btn>
         </template>
          <span>Go to the Instructions page</span>
@@ -44,9 +34,14 @@
         <span>About</span>
       </v-btn>
 
-      <v-btn href="https://github.com/diasor/memory-game-v2" target="_blank" text>
-        <span class="shrink hidden-sm-and-down mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn
+        class="text-small-devices"
+        href="https://github.com/diasor/memory-game-v2"
+        target="_blank"
+        text
+      >
+        <span>Latest Release</span>
+        <v-icon class="release-icon">mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -77,3 +72,19 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .text-small-devices {
+    display: none !important;
+    width: 0 !important;
+
+    @media screen and (min-width: 450px) {
+      width: auto !important;
+      display: flex !important;
+    }
+  }
+
+  .release-icon {
+    padding-left: 5px;
+  }
+
+</style>

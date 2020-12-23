@@ -1,7 +1,7 @@
 <template>
     <v-card
+      class="container"
       min-width="800"
-      class="ma-2 pl-10 pr-10 pb-2 pt-2"
       aria-label="Memory Game Board"
     >
         <p role="status" v-if="gameAccessibilityMessage">
@@ -16,9 +16,9 @@
 
         <main
           id="main"
-          class="container"
           tabindex="-1"
         >
+          <div class="select-container">
             <v-select
                 id="selection"
                 v-model="gameTheme"
@@ -31,24 +31,25 @@
                 :items="gameThemeOptions"
                 @change="changeTemplate(gameTheme)"
             />
-        <section aria-label="Memory Game Board" id="cards">
-            <v-layout wrap row align-content-center  class="pa-1 deck-layout">
-                <v-flex
-                    xs6 sm4 md3 lg2
-                    v-for="(card, index) in this.deck.cards"
-                    :key="index"
-                    :aria-label="[card.flipped ? card.name : '']"
-                    class="deck-cards"
-                >
-                    <Card
-                        :card="card"
-                        :index="index"
-                        :extended="extended"
-                        @onFlip="flipThisCard(card, index)"
-                    />
-                </v-flex>
-            </v-layout>
-        </section>
+          </div>
+
+          <!-- <div class="deck-container"> -->
+            <div class="deck-layout">
+              <div
+                v-for="(card, index) in this.deck.cards"
+                 :key="index"
+                class="deck-cards"
+              >
+                <Card
+                  :aria-label="[card.flipped ? card.name : '']"
+                  :card="card"
+                  :index="index"
+                  :extended="extended"
+                  @onFlip="flipThisCard(card, index)"
+                />
+              </div>
+            </div>
+          <!-- </div> -->
         </main>
     </v-card>
 </template>
@@ -179,48 +180,89 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    .deck-layout {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
+<style lang="scss">
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    width: 100vw;
+  }
+
+  main {
+    // display: flex;
+    // flex-direction: column;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+
+  .select-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: auto;
+  }
+
+  // .deck-container {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   // width: 100%;
+  //   margin: auto;
+  //   background-color: peru;
+  // }
+
+  .deck-layout {
+    display: grid;
+    grid-template-columns: 40% 40%;
+    width: 100vw;
+    margin: auto;
+    padding: auto;
+
+      @media screen and (min-width: 450px) {
+          margin: auto;
+          padding: 0;
+          width: 75vw !important;
+      }
+
+      @media screen and (min-width: 600px) {
+          grid-template-columns: 30% 30% 30%;
+          margin: auto;
+          padding: 0;
+          // width: 75vw !important;
+      }
+
+      @media screen and (min-width: 900px) {
+          grid-template-columns: 25% 25% 25% 250%;
+          margin: auto ;
+          padding: 0 1rem;
+      }
+  }
+
+  .deck-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 150px;
+    padding: 0;
+    margin: 1rem;
+
+    @media screen and (min-width: 720px) {
+        margin: 1rem 0;
         padding: 0;
-        max-width: 90vw !important;
-
-        @media (min-width: 600px) {
-            padding: 1rem;
-            max-width: 90vw !important;
-        }
-
-        @media (min-width: 1200px) {
-            max-width: 70vw !important;
-        }
     }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        max-width: 100vw;
-        margin: 0;
-        padding: 0;
+    @media screen and (min-width: 900px) {
+        margin: 0 1rem 2rem 1rem;
     }
+  }
 
-    .deck-cards {
-        padding: 0;
-        margin: 0.5rem 0;
-
-        @media (min-width: 600px) {
-            margin: 0 1rem 2rem 1rem !important;
-        }
-    }
-
-    [role='status'] {
-      height: 0;
-      margin: 0;
-      overflow: hidden;
-      font-weight: bold;
-    }
+  [role='status'] {
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    font-weight: bold;
+  }
 </style>
