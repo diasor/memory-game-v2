@@ -63,6 +63,7 @@ export default {
   #memory-page {
     max-width: 100vw;
   }
+
   // Skip to Main
   .skip-links {
     margin: 0;

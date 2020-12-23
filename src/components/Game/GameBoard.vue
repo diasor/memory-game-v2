@@ -231,7 +231,6 @@ export default {
           grid-template-columns: 30% 30% 30%;
           margin: auto;
           padding: 0;
-          // width: 75vw !important;
       }
 
       @media screen and (min-width: 900px) {

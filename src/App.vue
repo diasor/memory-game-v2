@@ -72,6 +72,7 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
   .text-small-devices {
     display: none !important;
@@ -86,5 +87,4 @@ export default {
   .release-icon {
     padding-left: 5px;
   }
-
 </style>
