@@ -27,6 +27,7 @@
             <li> Disney theme (with Disney images)</li>
             <li> Harry Potter theme (with Harry Potter images)</li>
             <li> Harry Potter extended theme (with many more Harry Potter images)</li>
+            <li> Alphabet (the system generates 3 sets of different cuts of the alphabet ramdomically)</li>
         </ul>
 
         This for once, made it more interesting (at least for my kids to play).

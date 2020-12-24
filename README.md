@@ -31,6 +31,8 @@ This project was originally forked from `https://github.com/mlama007/Vue-Memory-
 ### How to use it
 If you would like just to test the matching game, just feel free to select a game, and start playing.
 
+[Here](https://dsormani.com/my-projects/memory-game/#) you can see it running. And [here](https://dsormani.com/my-projects/memory-game/#/about) you can find detailed documentation of the project. 
+
 If you would like to test its accessibility capabilities, you will need to install some screen reader on Chrome (like for instance ChromeVox or ScreenReader). If you install such a plugin, every time the user clicks on a card, the system will feedback to the user. Check it out.
 
 ### Some Improvements

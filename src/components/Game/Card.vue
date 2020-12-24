@@ -9,6 +9,7 @@
     >
       <div v-if="!card.flipped" class="card" :style="cssBackCard" />
       <div v-else-if="card.icon !== null" :class="card.icon"></div>
+      <div v-else-if="card.useText" class="card__text">{{card.img }}</div>
       <div v-else :class="[ extended ? 'card__svg-extended': 'card__svg']">
         <img v-if="card.img" :src="imageSource" />
       </div>
@@ -97,6 +98,12 @@ export default {
     @media screen and (min-width: 450px) {
       height: $card-size;
       width: $card-size;
+    }
+
+    &__text {
+      font-family: 'Carter One', cursive;
+      font-size: 60px;
+      color: whitesmoke;
     }
 
     &__svg {

@@ -10,7 +10,9 @@ export default new Vuex.Store({
     templateName: "default",
     templateUseIcons: true,
     iconPrefix: "fa fa-",
+    templateUseText: false,
     templateImages: [],
+
     // game
     win: false,
     stars: 3,
@@ -21,6 +23,8 @@ export default new Vuex.Store({
     deck: {
       cards: []
     },
+
+    // accessibilitiy
     gameAccessibilityMessage: "",
     routeAccessibilityMessage: ""
   },
@@ -41,6 +45,7 @@ export default new Vuex.Store({
     UPDATE_TEMPLATE (state, templatePayload) {
       state.templateName = templatePayload.name
       state.templateUseIcons = templatePayload.useIcons
+      state.templateUseText = templatePayload.useText
       state.iconPrefix = templatePayload.iconPrefix
       state.templateImages = templatePayload.images
       state.templateFolder = templatePayload.folder
@@ -49,31 +54,20 @@ export default new Vuex.Store({
     SHUFFLE_DECK (state) {
       state.deck.cards = []
       for (let index = 0; index < state.templateImages.length; index++) {
-        state.deck.cards.push({
+        const card = {
           name: state.templateImages[index],
           icon: state.templateUseIcons
             ? `${state.iconPrefix}${state.templateImages[index]}`
             : null,
-          img: !state.templateUseIcons
-            ? `img/${state.templateFolder}/${state.templateImages[index]}.png`
-            : null,
-          // img: 'hp_heart.png',
+          useText: state.templateUseText,
+          img: getImagePath(state.templateUseIcons, state.templateUseText, state.templateImages[index], state.templateFolder),
           flipped: false,
           match: false,
           close: false
-        })
-        state.deck.cards.push({
-          name: state.templateImages[index],
-          icon: state.templateUseIcons
-            ? `${state.iconPrefix}${state.templateImages[index]}`
-            : null,
-          img: !state.templateUseIcons
-            ? `img/${state.templateFolder}/${state.templateImages[index]}.png`
-            : null,
-          flipped: false,
-          match: false,
-          close: false
-        })
+        }
+        // there should be 2 of each card per deck, so the match can be found
+        state.deck.cards.push({ ...card })
+        state.deck.cards.push({ ...card })
       }
 
       // shuffle
@@ -166,15 +160,24 @@ export default new Vuex.Store({
   actions: {
     // manage template
     getTemplate ({ commit }, templateName) {
-      const templateInformation = templates.getTemplateInformation(
-        templateName
-      )
+      let template = templateName
+      if (templateName === "Alphabet") {
+        // if the template is Alphabet, the system will generate a random number
+        // between 1 and 3 to generate one of three different alphabet sections
+        const randomAlphabet = Math.floor(Math.random() * 3) + 1
+        template = `${templateName}${randomAlphabet}`
+      }
+      const templateInformation = templates.getTemplateInformation(template)
       commit("UPDATE_TEMPLATE", {
         name: templateInformation.name,
         useIcons:
           templateInformation.useIcons === undefined
             ? false
             : templateInformation.useIcons,
+        useText:
+          templateInformation.useText === undefined
+            ? false
+            : templateInformation.useText,
         iconPrefix:
           templateInformation.iconPrefix === undefined
             ? false
@@ -265,3 +268,9 @@ export default new Vuex.Store({
 
   modules: {}
 })
+
+function getImagePath (useIcons, useText, imageName, folder) {
+  if (useText) return imageName
+  else if (useIcons) return null
+  else return `img/${folder}/${imageName}.png`
+}

@@ -5,6 +5,7 @@ export default {
         return {
           name: "default",
           useIcons: true,
+          useText: false,
           iconPrefix: "fa fa-",
           images: [
             "car",
@@ -22,6 +23,7 @@ export default {
         return {
           name: "animals",
           useIcons: true,
+          useText: false,
           iconPrefix: "fa fa-",
           images: [
             "dog",
@@ -39,6 +41,7 @@ export default {
         return {
           name: "furniture",
           useIcons: true,
+          useText: false,
           iconPrefix: "fa fa-",
           images: [
             "chair",
@@ -56,6 +59,7 @@ export default {
         return {
           name: "harry-potter",
           useIcons: false,
+          useText: false,
           images: [
             "head",
             "deathly hallows",
@@ -72,6 +76,7 @@ export default {
         return {
           name: "harry-potter",
           useIcons: false,
+          useText: false,
           images: [
             "head",
             "deathly hallows",
@@ -96,6 +101,7 @@ export default {
         return {
           name: "disney",
           useIcons: false,
+          useText: false,
           images: [
             "daisy duck",
             "donald duck",
@@ -107,6 +113,57 @@ export default {
             "scrooge"
           ],
           folder: "disney"
+        }
+      case "Alphabet1":
+        return {
+          name: "alphabet1",
+          useIcons: false,
+          useText: true,
+          images: [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H"
+          ],
+          folder: ""
+        }
+      case "Alphabet2":
+        return {
+          name: "alphabet2",
+          useIcons: false,
+          useText: true,
+          images: [
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P"
+          ],
+          folder: ""
+        }
+      case "Alphabet3":
+        return {
+          name: "alphabet3",
+          useIcons: false,
+          useText: true,
+          images: [
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X"
+          ],
+          folder: ""
         }
       default:
         return []

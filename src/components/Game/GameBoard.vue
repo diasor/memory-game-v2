@@ -28,7 +28,7 @@
                 :chips="true"
                 solo
                 :items="gameThemeOptions"
-                @change="changeTemplate(gameTheme)"
+                @input="changeTemplate(gameTheme)"
             />
           </div>
 
@@ -66,7 +66,7 @@ export default {
   data: () => ({
     gameTheme: "",
     columns: 0,
-    gameThemeOptions: ["Default", "Animals", "Furniture", "Disney", "Harry Potter", "Harry Potter Extended"]
+    gameThemeOptions: ["Default", "Animals", "Furniture", "Disney", "Alphabet", "Harry Potter", "Harry Potter Extended"]
   }),
 
   computed: {
@@ -110,6 +110,7 @@ export default {
         this.updateAmountMoves({ moves: this.amountMoves + 1 })
         this.updateStars()
       }
+
       // only allow flips if there are < or = 2 flipped cards
       if (this.amountCardsFlipped < 2) {
         if (this.amountCardsFlipped < 1) {
@@ -131,6 +132,7 @@ export default {
 
           // reset flipped cards
           this.resetCardsFlipped({ cards: this.cardsFlipped })
+
           if (this.cardsMatched === this.deck.cards.length / 2) {
             // if number of cards matched = number or cards, then win the game
             this.updateWin({ win: true })
