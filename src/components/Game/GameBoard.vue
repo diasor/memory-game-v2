@@ -27,9 +27,30 @@
                 :autofocus="true"
                 :chips="true"
                 solo
-                :items="gameThemeOptions"
+                :items="gameThemeItems"
                 @input="changeTemplate(gameTheme)"
-            />
+            >
+              <template v-slot:selection="{ item }">
+                <img
+                  v-if="item.icon===''"
+                  max-width="30px" max-height="30px"
+                  class="icon-image"
+                  :src="imageSource(item.image)"
+                />
+                <v-icon v-else size="20px" class="pr-2" color="#009688">{{item.icon}}</v-icon>
+                <span>{{ item.text }}</span>
+              </template>
+              <template v-slot:item="{ item }">
+                <img
+                  v-if="item.icon===''"
+                  max-width="30px" max-height="30px"
+                  class="icon-image"
+                  :src="imageSource(item.image)"
+                />
+                <v-icon v-else size="20px" class="pr-2">{{item.icon}}</v-icon>
+                <span>{{ item.text }}</span>
+              </template>
+            </v-select>
           </div>
 
           <div class="deck-layout">
@@ -66,7 +87,42 @@ export default {
   data: () => ({
     gameTheme: "",
     columns: 0,
-    gameThemeOptions: ["Default", "Animals", "Furniture", "Disney", "Alphabet", "Harry Potter", "Harry Potter Extended"]
+    gameThemeItems:
+      [{
+        text: "Default",
+        icon: "fa fa-car",
+        image: ""
+      },
+      {
+        text: "Animals",
+        icon: "fa fa-dog",
+        image: ""
+      },
+      {
+        text: "Furniture",
+        icon: "fa fa-couch",
+        image: ""
+      },
+      {
+        text: "Disney",
+        icon: "",
+        image: "img/disney/mickey.png"
+      },
+      {
+        text: "Alphabet",
+        icon: "",
+        image: "img/alphabet.png"
+      },
+      {
+        text: "Harry Potter",
+        icon: "",
+        image: "img/harry-potter/head.png"
+      },
+      {
+        text: "Harry Potter Extended",
+        icon: "",
+        image: "img/harry-potter/sorting hat.png"
+      }]
   }),
 
   computed: {
@@ -101,6 +157,10 @@ export default {
       "updateStars",
       "getTemplate"
     ]),
+
+    imageSource (imageName) {
+      return (imageName === "") ? "" : require(`../../assets/${imageName}`)
+    },
 
     flipThisCard (card, index) {
       if (card.flipped) {
@@ -185,7 +245,6 @@ export default {
     flex-direction: column;
     align-items: center;
     padding: 0;
-    // width: 100vw;
   }
 
   main {
@@ -206,7 +265,6 @@ export default {
     display: grid;
     grid-template-columns: 40% 40%;
     max-width: 100% !important;
-    // margin: auto;
     padding: 0;
     overflow:hidden !important;
 
@@ -252,5 +310,12 @@ export default {
     margin: 0;
     overflow: hidden;
     font-weight: bold;
+  }
+
+  .icon-image {
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    margin-right: 10px;
   }
 </style>
