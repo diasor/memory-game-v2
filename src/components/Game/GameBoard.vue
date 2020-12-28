@@ -31,24 +31,10 @@
                 @input="changeTemplate(gameTheme)"
             >
               <template v-slot:selection="{ item }">
-                <img
-                  v-if="item.icon===''"
-                  max-width="30px" max-height="30px"
-                  class="icon-image"
-                  :src="imageSource(item.image)"
-                />
-                <v-icon v-else size="20px" class="pr-2" color="#009688">{{item.icon}}</v-icon>
-                <span>{{ item.text }}</span>
+                <selection :item="item" :isSelected="true" />
               </template>
               <template v-slot:item="{ item }">
-                <img
-                  v-if="item.icon===''"
-                  max-width="30px" max-height="30px"
-                  class="icon-image"
-                  :src="imageSource(item.image)"
-                />
-                <v-icon v-else size="20px" class="pr-2">{{item.icon}}</v-icon>
-                <span>{{ item.text }}</span>
+                <selection :item="item" :isSelected="false" />
               </template>
             </v-select>
           </div>
@@ -76,246 +62,239 @@
 import { mapState, mapGetters, mapActions } from "vuex"
 import Card from "./Card.vue"
 import Winning from "./Winning.vue"
+import Selection from "../Basics/Selection.vue"
 
 export default {
-  name: "Home",
-  components: {
-    Card,
-    Winning
+	name: "Home",
+
+	components: {
+		Card,
+		Winning,
+		Selection
+	},
+
+	data: () => ({
+		gameTheme: "",
+		columns: 0,
+		gameThemeItems:
+		[{
+			text: "Default",
+			icon: "fa fa-car",
+			image: ""
+		},
+		{
+			text: "Animals",
+			icon: "fa fa-dog",
+			image: ""
+		},
+		{
+			text: "Furniture",
+			icon: "fa fa-couch",
+			image: ""
+		},
+		{
+			text: "Disney",
+			icon: "",
+			image: "img/disney/mickey.png"
+		},
+		{
+			text: "Alphabet",
+			icon: "",
+			image: "img/alphabet.png"
+		},
+		{
+			text: "Harry Potter",
+			icon: "",
+			image: "img/harry-potter/head.png"
+		},
+		{
+			text: "Harry Potter Extended",
+			icon: "",
+			image: "img/harry-potter/sorting hat.png"
+		}]
+	}),
+
+	computed: {
+		...mapState([
+			"gameAccessibilityMessage",
+			"win",
+			"stars",
+			"cardsFlipped",
+			"amountCardsFlipped",
+			"amountMoves",
+			"cardsMatched"
+		]),
+
+		...mapGetters(["deck", "gameUpdate"]),
+			extended () {
+			return this.deck.cards.length > 16
+		}
   },
 
-  data: () => ({
-    gameTheme: "",
-    columns: 0,
-    gameThemeItems:
-      [{
-        text: "Default",
-        icon: "fa fa-car",
-        image: ""
-      },
-      {
-        text: "Animals",
-        icon: "fa fa-dog",
-        image: ""
-      },
-      {
-        text: "Furniture",
-        icon: "fa fa-couch",
-        image: ""
-      },
-      {
-        text: "Disney",
-        icon: "",
-        image: "img/disney/mickey.png"
-      },
-      {
-        text: "Alphabet",
-        icon: "",
-        image: "img/alphabet.png"
-      },
-      {
-        text: "Harry Potter",
-        icon: "",
-        image: "img/harry-potter/head.png"
-      },
-      {
-        text: "Harry Potter Extended",
-        icon: "",
-        image: "img/harry-potter/sorting hat.png"
-      }]
-  }),
+	methods: {
+		...mapActions([
+			"updateAmountMoves",
+			"updateCardsFlipped",
+			"resetCardsFlipped",
+			"shuffle",
+			"flipCard",
+			"closeCard",
+			"markMatchedCards",
+			"newGame",
+			"updateAccessibilityMessage",
+			"updateWin",
+			"updateStars",
+			"getTemplate"
+		]),
 
-  computed: {
-    ...mapState([
-      "gameAccessibilityMessage",
-      "win",
-      "stars",
-      "cardsFlipped",
-      "amountCardsFlipped",
-      "amountMoves",
-      "cardsMatched"
-    ]),
+		flipThisCard (card, index) {
+			if (card.flipped) {
+				this.updateAccessibilityMessage({ message: "Card already flipped." })
+				return
+			} else {
+				this.updateAmountMoves({ moves: this.amountMoves + 1 })
+				this.updateStars()
+			}
 
-    ...mapGetters(["deck", "gameUpdate"]),
-    extended () {
-      return this.deck.cards.length > 16
-    }
-  },
+			// only allow flips if there are < or = 2 flipped cards
+			if (this.amountCardsFlipped < 2) {
+				if (this.amountCardsFlipped < 1) {
+					this.updateAccessibilityMessage({ message: `${card.name} flipped.` })
+				}
+				this.flipCard({ index, flipped: true })
+				this.updateCardsFlipped({ cards: card })
+				// was there a match?
+				if (this.amountCardsFlipped === 2 && this.cardsFlipped[0].name === this.cardsFlipped[1].name) {
+					// there is a match
+					this.markMatchedCards({ cardName: card.name })
+					const remaining = this.deck.cards.length / 2 - this.cardsMatched
+					this.updateAccessibilityMessage({
+						message: `${card.name} flipped. Match found! ${remaining} matches left.`
+					})
 
-  methods: {
-    ...mapActions([
-      "updateAmountMoves",
-      "updateCardsFlipped",
-      "resetCardsFlipped",
-      "shuffle",
-      "flipCard",
-      "closeCard",
-      "markMatchedCards",
-      "newGame",
-      "updateAccessibilityMessage",
-      "updateWin",
-      "updateStars",
-      "getTemplate"
-    ]),
+					// reset flipped cards
+					this.resetCardsFlipped({ cards: this.cardsFlipped })
 
-    imageSource (imageName) {
-      return (imageName === "") ? "" : require(`../../assets/${imageName}`)
-    },
+					if (this.cardsMatched === this.deck.cards.length / 2) {
+						// if number of cards matched = number or cards, then win the game
+						this.updateWin({ win: true })
+						this.updateAccessibilityMessage({ message: this.winningMessage })
+					}
+				} else if (this.amountCardsFlipped === 2 && this.cardsFlipped[0].name !== this.cardsFlipped[1].name) {
+					// if there was not match, wait before closing mismatched card
+					this.updateAccessibilityMessage({
+						message: `${card.name} flipped. No match. `
+					})
+					setTimeout(() => {
+						for (let i = 0; i < this.deck.cards.length; i++) {
+							if (this.deck.cards[i].flipped && !this.deck.cards[i].match) {
+								this.closeCard({ index: i, flipped: false, close: true })
+							}
+						}
+						this.resetCardsFlipped()
+						}, 900)
+					}
+				}
+		},
 
-    flipThisCard (card, index) {
-      if (card.flipped) {
-        this.updateAccessibilityMessage({ message: "Card already flipped." })
-        return
-      } else {
-        this.updateAmountMoves({ moves: this.amountMoves + 1 })
-        this.updateStars()
-      }
+		changeTemplate (newTheme) {
+			this.gameTheme = newTheme
+			// get thee new theme information
+			this.getTemplate(newTheme)
+			// reset values
+			this.newGame()
+			// shuffle a new deck
+			this.shuffle()
+		},
 
-      // only allow flips if there are < or = 2 flipped cards
-      if (this.amountCardsFlipped < 2) {
-        if (this.amountCardsFlipped < 1) {
-          this.updateAccessibilityMessage({ message: `${card.name} flipped.` })
-        }
-        this.flipCard({ index, flipped: true })
-        this.updateCardsFlipped({ cards: card })
-        // was there a match?
-        if (
-          this.amountCardsFlipped === 2 &&
-          this.cardsFlipped[0].name === this.cardsFlipped[1].name
-        ) {
-          // there is a match
-          this.markMatchedCards({ cardName: card.name })
-          const remaining = this.deck.cards.length / 2 - this.cardsMatched
-          this.updateAccessibilityMessage({
-            message: `${card.name} flipped. Match found! ${remaining} matches left.`
-          })
+		onPlayAgain () {
+			this.changeTemplate("Default")
+		}
+	},
 
-          // reset flipped cards
-          this.resetCardsFlipped({ cards: this.cardsFlipped })
-
-          if (this.cardsMatched === this.deck.cards.length / 2) {
-            // if number of cards matched = number or cards, then win the game
-            this.updateWin({ win: true })
-            this.updateAccessibilityMessage({ message: this.winningMessage })
-          }
-        } else if (
-          this.amountCardsFlipped === 2 &&
-          this.cardsFlipped[0].name !== this.cardsFlipped[1].name
-        ) {
-          // if there was not match, wait before closing mismatched card
-          this.updateAccessibilityMessage({
-            message: `${card.name} flipped. No match. `
-          })
-          setTimeout(() => {
-            for (let i = 0; i < this.deck.cards.length; i++) {
-              if (this.deck.cards[i].flipped && !this.deck.cards[i].match) {
-                this.closeCard({ index: i, flipped: false, close: true })
-              }
-            }
-            this.resetCardsFlipped()
-          }, 900)
-        }
-      }
-    },
-
-    changeTemplate (newTheme) {
-      this.gameTheme = newTheme
-      // get thee new theme information
-      this.getTemplate(newTheme)
-      // reset values
-      this.newGame()
-      // shuffle a new deck
-      this.shuffle()
-    },
-
-    onPlayAgain () {
-      this.changeTemplate("Default")
-    }
-  },
-
-  created () {
-    this.changeTemplate("Default")
-  }
+	created () {
+		this.changeTemplate("Default")
+	}
 }
 </script>
 
 <style lang="scss">
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0;
-  }
+	.container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 0;
+	}
 
-  main {
-    max-width: 100vw;
-    margin: 0;
-    padding: 0;
-  }
+	main {
+		max-width: 100vw;
+		margin: 0;
+		padding: 0;
+	}
 
-  .select-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    margin: auto;
-  }
+	.select-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 300px;
+		margin: auto;
+	}
 
-  .deck-layout {
-    display: grid;
-    grid-template-columns: 40% 40%;
-    max-width: 100% !important;
-    padding: 0;
-    overflow:hidden !important;
+	.deck-layout {
+		display: grid;
+		grid-template-columns: 40% 40%;
+		max-width: 100% !important;
+		padding: 0;
+		overflow:hidden !important;
 
-      @media screen and (min-width: 450px) {
-          margin: auto;
-          padding: 0;
-          width: 75vw !important;
-      }
+		@media screen and (min-width: 450px) {
+			margin: auto;
+			padding: 0;
+			width: 75vw !important;
+		}
 
-      @media screen and (min-width: 600px) {
-          grid-template-columns: 30% 30% 30%;
-          margin: auto;
-          padding: 0;
-      }
+		@media screen and (min-width: 600px) {
+			grid-template-columns: 30% 30% 30%;
+			margin: auto;
+			padding: 0;
+		}
 
-      @media screen and (min-width: 900px) {
-          grid-template-columns: 25% 25% 25% 250%;
-          margin: auto ;
-          padding: 0 1rem;
-      }
-  }
+		@media screen and (min-width: 900px) {
+			grid-template-columns: 25% 25% 25% 250%;
+			margin: auto ;
+			padding: 0 1rem;
+		}
+	}
 
-  .deck-cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    max-width: 150px;
-    padding: 0;
-    margin: 1rem;
+	.deck-cards {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		max-width: 150px;
+		padding: 0;
+		margin: 1rem;
 
-    @media screen and (min-width: 720px) {
-        margin: 1rem 0;
-        padding: 0;
-    }
+		@media screen and (min-width: 720px) {
+			margin: 1rem 0;
+			padding: 0;
+		}
 
-    @media screen and (min-width: 900px) {
-        margin: 0 1rem 2rem 1rem;
-    }
-  }
+		@media screen and (min-width: 900px) {
+			margin: 0 1rem 2rem 1rem;
+		}
+	}
 
-  [role='status'] {
-    height: 0;
-    margin: 0;
-    overflow: hidden;
-    font-weight: bold;
-  }
+	[role='status'] {
+		height: 0;
+		margin: 0;
+		overflow: hidden;
+		font-weight: bold;
+	}
 
-  .icon-image {
-    height: 20px;
-    width: 20px;
-    border-radius: 3px;
-    margin-right: 10px;
-  }
+	.icon-image {
+		height: 20px;
+		width: 20px;
+		border-radius: 3px;
+		margin-right: 10px;
+	}
 </style>

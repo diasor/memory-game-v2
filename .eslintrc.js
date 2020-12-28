@@ -13,18 +13,24 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'indent': "off",
     'quotes': ["error", "double"],
-    'brace-style':"error"
+	'brace-style':"error",
+	"no-tabs": 0
   },
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
-      env: {
-        jest: true
-      }
+		files: ['*.vue'],
+		rules: {
+			indent: 'off'
+		},
+		files: [
+			'**/__tests__/*.{j,t}s?(x)',
+			'**/tests/unit/**/*.spec.{j,t}s?(x)'
+		],
+		env: {
+			jest: true
+		}
     }
   ]
 }

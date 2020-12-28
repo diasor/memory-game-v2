@@ -19,67 +19,67 @@
 
 <script>
 export default {
-  name: "Card",
+    name: "Card",
 
-  props: {
-    card: {
-      type: Object,
-      default: () => {}
+    props: {
+        card: {
+            type: Object,
+            default: () => {}
+        },
+
+        index: {
+            type: Number,
+            required: true
+        },
+
+        extended: {
+            type: Boolean,
+            required: false
+        }
     },
 
-    index: {
-      type: Number,
-      required: true
-    },
+    data: () => ({
+        cssBackCard: {
+            backgroundBlendMode: "overlay",
+            backgroundImage: `url(${require("@/assets/img/joker2.png")}), linear-gradient(to bottom, #424242, #B2DFDB)`,
+            backgroundPosition: "center",
+            backgroundSize: "cover"
+        }
+    }),
 
-    extended: {
-      type: Boolean,
-      required: false
-    }
-  },
+    computed: {
+		imageSource () {
+            return this.card.img ? require(`../../assets/${this.card.img}`) : ""
+		},
 
-  data: () => ({
-    cssBackCard: {
-      backgroundBlendMode: "overlay",
-      backgroundImage: `url(${require("@/assets/img/joker2.png")}), linear-gradient(to bottom, #424242, #B2DFDB)`,
-      backgroundPosition: "center",
-      backgroundSize: "cover"
-    }
-  }),
+		cardClass () {
+			const extendedClass = this.extended ? "card__extended" : ""
+			if (this.card.match) {
+				return `card ${extendedClass} match`
+			} else if (this.card.flipped) {
+				return `card ${extendedClass} show`
+			} else if (this.card.close) {
+				return `card ${extendedClass} close`
+			} else {
+				return `card ${extendedClass}`
+			}
+		}
+	},
 
-  computed: {
-    imageSource () {
-      return this.card.img ? require(`../../assets/${this.card.img}`) : ""
-    },
-
-    cardClass () {
-      const extendedClass = this.extended ? "card__extended" : ""
-      if (this.card.match) {
-        return `card ${extendedClass} match`
-      } else if (this.card.flipped) {
-        return `card ${extendedClass} show`
-      } else if (this.card.close) {
-        return `card ${extendedClass} close`
-      } else {
-        return `card ${extendedClass}`
-      }
-    }
-  },
-
-  methods: {
-    flipCard () {
-      this.$emit("onFlip")
-    }
-  }
+	methods: {
+		flipCard () {
+			this.$emit("onFlip")
+		}
+	}
 }
 </script>
 
 <style lang="scss" scoped>
-  $icon-size: 50px;
-  $card-small-size: 90px;
-  $card-image-medium-size: 112px;
-  $card-size: 125px;
-  $icon-background-color: #00695C;
+    $icon-size: 50px;
+    $card-small-size: 90px;
+    $card-image-medium-size: 112px;
+    $card-size: 125px;
+    $icon-background-color: #00695C;
 
   .card {
     display: flex;

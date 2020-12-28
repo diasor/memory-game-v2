@@ -44,34 +44,34 @@ import VueConfetti from "vue-confetti"
 Vue.use(VueConfetti)
 
 export default {
-  name: "Winning",
+	name: "Winning",
 
-  computed: {
-    ...mapState(["stars", "templateName"]),
-    ...mapGetters(["winningMessage"])
-  },
+	computed: {
+		...mapState(["stars", "templateName"]),
+		...mapGetters(["winningMessage"])
+	},
 
-  methods: {
-    startConfetti () {
-      this.$confetti.start()
-    },
+	methods: {
+		startConfetti () {
+			this.$confetti.start()
+		},
 
-    stopConfetti () {
-      this.$confetti.stop()
-    },
+		stopConfetti () {
+			this.$confetti.stop()
+		},
 
-    playAgain () {
-      this.$emit("onPlayAgain")
-    }
-  },
+		playAgain () {
+			this.$emit("onPlayAgain")
+		}
+	},
 
-  mounted () {
-    this.startConfetti()
-  },
+	mounted () {
+		this.startConfetti()
+	},
 
-  beforeDestroy () {
-    this.stopConfetti()
-  }
+	beforeDestroy () {
+		this.stopConfetti()
+	}
 }
 </script>
 
