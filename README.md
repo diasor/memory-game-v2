@@ -87,16 +87,28 @@ For more details, take a look at the "About"section.
 
 ### Solved game
 
-This section shows how the game looks like with the new templates.
+This section shows how the game looks like with some of the new templates.
 
-### New Harry Potter theme solved game
+### New Harry Potter (extended) deck theme solved game
 
-![alt text](src/assets/img/results/harry-potter-extended.png?raw=true 'Harry Potter solved game')
+![alt text](src/assets/img/results/harry-potter-extended-win.png?raw=true 'Harry Potter solved game')
 
-### New Disney theme solved game
+### New Disney deck theme solved game
 
-![alt text](src/assets/img/results/disney-results.png?raw=true 'Disney solved game')
+![alt text](src/assets/img/results/disney-win.png?raw=true 'Disney solved game')
+
+### Alphabet deck theme solved game
+
+![alt text](src/assets/img/results/alphabet-win.png?raw=true 'Alphabet solved game')
+
+### Star Wars deck theme solved game
+
+![alt text](src/assets/img/results/star-wars-win.png?raw=true 'Star Wars solved game')
 
 ### Default icon theme solved game
 
 ![alt text](src/assets/img/results/default-win.png?raw=true 'Default icon solved game')
+
+### Full deck
+
+![alt text](src/assets/img/results/full-deck.png?raw=true 'Full deck')

@@ -164,7 +164,24 @@ export default {
             "X"
           ],
           folder: ""
-        }
+		}
+		case "Star Wars":
+			return {
+				name: "star-wars",
+				useIcons: false,
+				useText: false,
+				images: [
+					"death-star",
+					"c3po",
+					"leia",
+					"droid",
+					"r2d2",
+					"wookie",
+					"darth-vader",
+					"yoda"
+				],
+				folder: "star-wars"
+			}
       default:
         return []
     }

@@ -111,6 +111,11 @@ export default {
 			text: "Harry Potter Extended",
 			icon: "",
 			image: "img/harry-potter/sorting hat.png"
+		},
+		{
+			text: "Star Wars",
+			icon: "",
+			image: "img/star-wars/darth-vader.png"
 		}]
 	}),
 
