@@ -29,11 +29,12 @@
                 solo
                 :items="gameThemeItems"
                 @input="changeTemplate(gameTheme)"
+				class="selection-container"
             >
-              <template v-slot:selection="{ item }">
+              <template v-slot:selection="{ item }" >
                 <selection :item="item" :isSelected="true" />
               </template>
-              <template v-slot:item="{ item }">
+              <template v-slot:item="{ item }" >
                 <selection :item="item" :isSelected="false" />
               </template>
             </v-select>
@@ -88,8 +89,13 @@ export default {
 			image: ""
 		},
 		{
-			text: "Furniture",
-			icon: "fa fa-couch",
+			text: "House",
+			icon: "fa fa-home",
+			image: ""
+		},
+		{
+			text: "Vehicles",
+			icon: "fa fa-car",
 			image: ""
 		},
 		{
@@ -301,5 +307,9 @@ export default {
 		width: 20px;
 		border-radius: 3px;
 		margin-right: 10px;
+	}
+
+	.v-menu__content  {
+		max-height: 4500px !important;
 	}
 </style>
