@@ -89,9 +89,9 @@ For more details, take a look at the "About"section.
 
 This section shows how the game looks like with some of the new templates.
 
-### New Harry Potter (extended) deck theme solved game
+### New Harry Potter deck theme solved game
 
-![alt text](src/assets/img/results/harry-potter-extended-win.png?raw=true 'Harry Potter solved game')
+![alt text](src/assets/img/results/harry-potter-win.png?raw=true 'Harry Potter solved game')
 
 ### New Disney deck theme solved game
 

@@ -50,7 +50,6 @@
                 :aria-label="[card.flipped ? card.name : '']"
                 :card="card"
                 :index="index"
-                :extended="extended"
                 @onFlip="flipThisCard(card, index)"
               />
             </div>
@@ -114,11 +113,6 @@ export default {
 			image: "img/harry-potter/head.png"
 		},
 		{
-			text: "Harry Potter Extended",
-			icon: "",
-			image: "img/harry-potter/sorting hat.png"
-		},
-		{
 			text: "Star Wars",
 			icon: "",
 			image: "img/star-wars/darth-vader.png"
@@ -136,10 +130,7 @@ export default {
 			"cardsMatched"
 		]),
 
-		...mapGetters(["deck", "gameUpdate"]),
-			extended () {
-			return this.deck.cards.length > 16
-		}
+		...mapGetters(["deck", "gameUpdate"])
   },
 
 	methods: {

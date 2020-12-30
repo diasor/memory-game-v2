@@ -1,17 +1,16 @@
 <template>
-	<v-card class="d-flex flex-wrap">
+	<v-card class="about-container">
 		<v-card-text>
 			This application offers a memory game where the user can find card matches through the randomly
 			displayed cards. What it is interesting about it, is that it also offers WAI-ARIA accessibility
-			that reads to the user the progress of the game.
-		</v-card-text>
-		<v-card-text>
-			This application was originally cloned from <a href="https://github.com/mlama007/Vue-Memory-Game" target="_blank">
+			that reads to the user the progress of the game. <br /><br />
+
+			It was originally cloned from <a href="https://github.com/mlama007/Vue-Memory-Game" target="_blank">
 			this</a> application presented on the Amsterdam Vue conference 2019.
 			At that talk I was really impressed with the speaker's approach towars accessibility and vue. How that
 			issue was(is) extremely important and how we can approach it within Vue applications.
 			So I cloned the code and I checked it out. After playing with it for a while, I made several improvements
-			to it, and this application is the result of that.
+			to it and this application is the result of that.
 		</v-card-text>
 
 		<v-card-title>Theme extension</v-card-title>
@@ -22,15 +21,14 @@
 			Furthermore, this application was expanded so not only can the user play with the default icon game,
 			but also there are several themes defined, kind of like card decks. There are currently 5:
 			<ul>
-				<li> Default theme (with font awesome icons)</li>
-				<li> Animals theme (with font awesome animal icons)</li>
-				<li> House theme (with font awesome household icons)</li>
-				<li> Vehicles theme (with font awesome vehicle icons)</li>
-				<li> Disney theme (with Disney images)</li>
-				<li> Harry Potter theme (with Harry Potter images)</li>
-				<li> Harry Potter extended theme (with many more Harry Potter images)</li>
-				<li> Alphabet (the system generates 3 sets of different cuts of the alphabet ramdomically)</li>
-				<li> Star Wars theme (with Star Wars images)</li>
+				<li> <b>Default theme</b> (with font awesome icons)</li>
+				<li> <b>Animals theme</b> (with font awesome animal icons)</li>
+				<li> <b>House theme</b> (with font awesome household icons)</li>
+				<li> <b>Vehicles theme</b> (with font awesome vehicle icons)</li>
+				<li> <b>Disney theme</b> (with Disney images)</li>
+				<li> <b>Harry Potter theme</b> (with Harry Potter images)</li>
+				<li> <b>Alphabet</b> (the system generates 3 sets of different cuts of the alphabet ramdomically)</li>
+				<li> <b>Star Wars theme</b> (with Star Wars images)</li>
 			</ul>
 			This for once, made it more interesting (at least for my kids to play).
 		</v-card-text>
@@ -92,11 +90,104 @@
 				<v-chip>Accessibility (ARIA)</v-chip>
 			</v-chip-group>
 		</v-card-text>
+
+		<v-card-title>This game in action </v-card-title>
+		<v-card-text>
+			Here I leave some images of how the game actually looks like (in case you don't want to play to 
+			see it through). <br/><br/>
+		</v-card-text>
+		
+		<v-carousel class="carousel-container">
+			<v-carousel-item
+				v-for="(result,i) in resultsContent"
+				:key="i"
+				reverse-transition="fade-transition"
+				transition="fade-transition"
+			>
+				<about-results :result="result" />
+			</v-carousel-item>
+		</v-carousel>
 	</v-card>
 </template>
 
 <script>
+import AboutResults from "./AboutResults.vue"
+
 export default {
-	name: "AboutApplication"
+	name: "AboutApplication",
+
+	components: {
+		AboutResults
+	},
+
+	computed: {
+        resultsContent () {
+			const maxHeight = "2000"
+			return [
+				{
+					title: "Full Deck",
+					text: `When the user opens the application a full page is presented with a set of face-down cards
+						that look like this:`,
+					image: require("../../assets/img/results/full-deck.png"),
+					carouselHeight: maxHeight
+				},
+				{
+					title: "Theme selection",
+					text: `The application offers a dropdown selection where the user user can choose the theme 
+						you want to play with. 
+						This selection shows the name of the theme but also an icon. This was done thinking 
+						of the user experience. Particularly, my 5 year old son loves to play with it, and the 
+						icon helps him select the theme by himself.`,
+					image: require("../../assets/img/results/theme-selection.png"),
+					height: "500px",
+					width: "300px",
+					carouselHeight: "800px"
+				},
+				{
+					title: "Default theme selection",
+					text: `By default the application selects the "Default" theme with several different icons to play with.
+						If the user plays with this one and wins, the application will look like this:`,
+					image: require("../../assets/img/results/default-win.png"),
+					carouselHeight: maxHeight
+				},
+				{
+					title: "Disney theme selection",
+					text: "If the user selects the Disney theme and wins, the application will look like this:",
+					image: require("../../assets/img/results/disney-win.png"),
+					carouselHeight: maxHeight
+				},
+				{
+					title: "Harry Potter theme selection",
+					text: "If the user selects the Harry Potter theme and wins, the application will look like this:",
+					image: require("../../assets/img/results/harry-potter-win.png"),
+					carouselHeight: maxHeight
+				},
+				{
+					title: "Star Wars theme selection",
+					text: "If the user selects the Star Wars theme and wins, the application will look like this:",
+					image: require("../../assets/img/results/star-wars-win.png"),
+					carouselHeight: maxHeight
+				}
+			]
+		}
+	}
 }
 </script>
+<style lang="scss" scoped>
+	.about-container {
+		& ul, li {
+			max-width: 98%;
+		}
+	}
+
+	.carousel-container {
+		max-width: 100vw;
+		height: 370px !important;
+		margin: 0;
+		padding: 0;
+
+		@media screen and (min-width: 400px) {
+			height: 560px !important;
+		}
+	}
+</style>

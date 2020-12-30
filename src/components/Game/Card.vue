@@ -10,7 +10,7 @@
       <div v-if="!card.flipped" class="card" :style="cssBackCard" />
       <div v-else-if="card.icon !== null" :class="card.icon"></div>
       <div v-else-if="card.useText" class="card__text">{{ card.img }}</div>
-      <div v-else :class="[ extended ? 'card__svg-extended': 'card__svg']">
+      <div v-else class="card__svg">
         <img v-if="card.img" :src="imageSource" />
       </div>
     </button>
@@ -30,11 +30,6 @@ export default {
         index: {
             type: Number,
             required: true
-        },
-
-        extended: {
-            type: Boolean,
-            required: false
         }
     },
 
@@ -53,15 +48,14 @@ export default {
 		},
 
 		cardClass () {
-			const extendedClass = this.extended ? "card__extended" : ""
 			if (this.card.match) {
-				return `card ${extendedClass} match`
+				return "card match"
 			} else if (this.card.flipped) {
-				return `card ${extendedClass} show`
+				return "card show"
 			} else if (this.card.close) {
-				return `card ${extendedClass} close`
+				return "card close"
 			} else {
-				return `card ${extendedClass}`
+				return "card"
 			}
 		}
 	},
@@ -124,36 +118,6 @@ export default {
         height: $card-small-size;
         width: $card-small-size;
         padding: 0.3rem;
-        border-radius: 0.5rem;
-
-        @media screen and (min-width: 450px) {
-          height: $card-size;
-          width: $card-size;
-        }
-      }
-    }
-
-    &__extended {
-      height: $card-small-size;
-      width: $card-small-size;
-
-      @media screen and (min-width: 450px) {
-          height: $card-image-medium-size;
-          width: $card-image-medium-size;
-      }
-    }
-
-    &__svg-extended {
-      height: $card-image-medium-size;
-      width: $card-image-medium-size;
-      padding: 0;
-      border-radius: 0.5rem;
-
-      > img {
-        height: $card-image-medium-size;
-        width: $card-image-medium-size;
-        margin: 0;
-        padding: 0;
         border-radius: 0.5rem;
 
         @media screen and (min-width: 450px) {

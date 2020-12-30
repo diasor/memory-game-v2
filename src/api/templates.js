@@ -81,11 +81,11 @@ export default {
 					images: [
 						"head",
 						"deathly hallows",
-						"heart",
+						"no-good",
 						"sorting hat",
-						"car",
-						"dobby",
-						"dumbledore",
+						"platform",
+						"lego",
+						"flying harry",
 						"hogwarts"
 					],
 					folder: "harry-potter"
@@ -98,20 +98,20 @@ export default {
 					images: [
 						"head",
 						"deathly hallows",
-						"heart",
-						"sorting hat",
-						"car",
-						"dobby",
-						"dumbledore",
-						"hogwarts",
-						// extended
-						"hogwarts-emblem",
 						"no-good",
+						"sorting hat",
 						"platform",
-						"siluetes",
 						"lego",
-						"patronum",
-						"snitch"
+						"flying harry",
+						"hogwarts"
+						// extended
+						// "hogwarts-emblem",
+						// "no-good",
+						// "platform",
+						// "siluetes",
+						// "lego",
+						// "patronum",
+						// "snitch"
 				],
 				folder: "harry-potter"
 			}
@@ -123,7 +123,7 @@ export default {
 					images: [
 						"daisy duck",
 						"donald duck",
-						"golfos",
+						"mickey-and-minnie",
 						"goofy",
 						"mickey",
 						"minnie",

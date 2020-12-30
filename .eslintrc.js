@@ -11,18 +11,19 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'indent': "off",
-    'quotes': ["error", "double"],
-	'brace-style':"error",
-	"no-tabs": 0
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "indent": "off",
+    "quotes": ["error", "double"],
+	"brace-style": "error",
+	"no-tabs": 0,
+	"no-trailing-spaces": "off"
   },
   overrides: [
     {
-		files: ['*.vue'],
+		files: ["*.vue"],
 		rules: {
-			indent: 'off'
+			indent: "off"
 		},
 		files: [
 			'**/__tests__/*.{j,t}s?(x)',
