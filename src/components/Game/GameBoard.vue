@@ -79,7 +79,7 @@ export default {
 		gameThemeItems:
 		[{
 			text: "Default",
-			icon: "fa fa-car",
+			icon: "fa fa-heart",
 			image: ""
 		},
 		{
@@ -94,7 +94,7 @@ export default {
 		},
 		{
 			text: "Vehicles",
-			icon: "fa fa-car",
+			icon: "fa fa-helicopter",
 			image: ""
 		},
 		{

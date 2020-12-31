@@ -106,7 +106,7 @@
 				<img :src="themeImage" class="theme-image" />
 			</div>
 		</v-card-text>
-		<v-carousel class="carousel-container">
+		<v-carousel class="carousel-container" height="100%">  
 			<v-carousel-item
 				v-for="(result,i) in resultsContent"
 				:key="i"
@@ -196,15 +196,17 @@ export default {
 		height: 400px;
 		width: 300px;
 	}
+</style>
 
+<style lang="scss">
 	.carousel-container {
 		max-width: 100vw;
-		height: 300px !important;
+		height: 300px;
 		margin: 0;
 		padding: 0;
 
 		@media screen and (min-width: 400px) {
-			height: 580px !important;
+			height: 580px;
 		}
 	}
 </style>

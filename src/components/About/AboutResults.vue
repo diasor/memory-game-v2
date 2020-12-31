@@ -60,7 +60,7 @@ export default {
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		margin: auto 0 auto 0;
+		margin: auto 0 4rem 0 !important;
 
 		> img {
 			width: 85%;
