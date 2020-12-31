@@ -3,8 +3,7 @@
 		<div class="result-title">{{ result.title }}</div>
 		<div class="result-text">{{ result.text }}</div>
 		<div class="result-image">
-			<img :src="result.image" :style="imageStyle" />
-			<!-- <img :src="result.image" /> -->
+			<img :src="result.image" />
 		</div>
 	</div>
 </template>
@@ -26,16 +25,6 @@ export default {
 		
 		imageWidth () {
 			return (this.result.width) ? this.result.width : "85%"
-		},
-
-		imageStyle () {
-			return {
-				width: this.imageWidth,
-				height: this.imageHeight,
-				"max-height": "550px",
-				"background-size": "cover",
-				"border-radius": "10px"
-			}
 		}
 	}
 }
@@ -71,23 +60,14 @@ export default {
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		// max-height: 500px;
-		// overflow: hidden;
 		margin: auto 0 auto 0;
-		
-		// > img {
-		// 	border-radius: 10px;
-		// 	width: 90%;
-		// 	height: 90%;
-		// 	object-fit: cover;
-		// 	// max-height: 250px;
-		// 	// max-width: 90%;
 
-		// 	// @media screen and (min-width: 400px) {
-		// 	// 	// height: 600px !important;
-		// 	// 	max-height: 700px;
-
-		// 	// }
-		// }
+		> img {
+			width: 85%;
+			height: 100%;
+			max-height: 550px;
+			background-size: cover;
+			border-radius: 10px;
+		}
 	}
 </style>

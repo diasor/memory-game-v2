@@ -92,11 +92,20 @@
 		</v-card-text>
 
 		<v-card-title>This game in action </v-card-title>
-		<v-card-text>
+		<v-card-text pb-0>
 			Here I leave some images of how the game actually looks like (in case you don't want to play to 
-			see it through). <br/><br/>
+			see it through).
 		</v-card-text>
-		
+		<v-card-subtitle mt-0 ml-0>Theme Selection</v-card-subtitle>
+		<v-card-text>
+			First of all, the application offers a dropdown list where the user user can choose the theme 
+			you want to play with. This selection list shows the name of the theme but also an icon. 
+			This was done thinking of the user experience. Particularly, my 5 year old son loves to play with it, 
+			and the icon helps him select the theme by himself.
+			<div class="theme-container">
+				<img :src="themeImage" class="theme-image" />
+			</div>
+		</v-card-text>
 		<v-carousel class="carousel-container">
 			<v-carousel-item
 				v-for="(result,i) in resultsContent"
@@ -121,58 +130,55 @@ export default {
 	},
 
 	computed: {
+		themeImage () {
+			return require("../../assets/img/results/theme-selection.png")
+		},
+
         resultsContent () {
-			const maxHeight = "2000"
 			return [
 				{
 					title: "Full Deck",
 					text: `When the user opens the application a full page is presented with a set of face-down cards
 						that look like this:`,
-					image: require("../../assets/img/results/full-deck.png"),
-					carouselHeight: maxHeight
-				},
-				{
-					title: "Theme selection",
-					text: `The application offers a dropdown selection where the user user can choose the theme 
-						you want to play with. 
-						This selection shows the name of the theme but also an icon. This was done thinking 
-						of the user experience. Particularly, my 5 year old son loves to play with it, and the 
-						icon helps him select the theme by himself.`,
-					image: require("../../assets/img/results/theme-selection.png"),
-					height: "500px",
-					width: "300px",
-					carouselHeight: "800px"
+					image: require("../../assets/img/results/full-deck.png")
 				},
 				{
 					title: "Default theme selection",
 					text: `By default the application selects the "Default" theme with several different icons to play with.
 						If the user plays with this one and wins, the application will look like this:`,
-					image: require("../../assets/img/results/default-win.png"),
-					carouselHeight: maxHeight
+					image: require("../../assets/img/results/default-win.png")
 				},
 				{
 					title: "Disney theme selection",
 					text: "If the user selects the Disney theme and wins, the application will look like this:",
-					image: require("../../assets/img/results/disney-win.png"),
-					carouselHeight: maxHeight
+					image: require("../../assets/img/results/disney-win.png")
 				},
 				{
 					title: "Harry Potter theme selection",
 					text: "If the user selects the Harry Potter theme and wins, the application will look like this:",
-					image: require("../../assets/img/results/harry-potter-win.png"),
-					carouselHeight: maxHeight
+					image: require("../../assets/img/results/harry-potter-win.png")
 				},
 				{
 					title: "Star Wars theme selection",
 					text: "If the user selects the Star Wars theme and wins, the application will look like this:",
-					image: require("../../assets/img/results/star-wars-win.png"),
-					carouselHeight: maxHeight
+					image: require("../../assets/img/results/star-wars-win.png")
+				},
+				{
+					title: "Vehicles theme selection",
+					text: "If the user selects the Vehicles theme and wins, the application will look like this:",
+					image: require("../../assets/img/results/vehicles-win.png")
+				},
+				{
+					title: "Alphabet theme selection",
+					text: "If the user selects the Alphabet theme and wins, the application will look like this:",
+					image: require("../../assets/img/results/alphabet-win.png")
 				}
 			]
 		}
 	}
 }
 </script>
+
 <style lang="scss" scoped>
 	.about-container {
 		& ul, li {
@@ -180,14 +186,25 @@ export default {
 		}
 	}
 
+	.theme-container {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.theme-image {
+		height: 400px;
+		width: 300px;
+	}
+
 	.carousel-container {
 		max-width: 100vw;
-		height: 370px !important;
+		height: 300px !important;
 		margin: 0;
 		padding: 0;
 
 		@media screen and (min-width: 400px) {
-			height: 560px !important;
+			height: 580px !important;
 		}
 	}
 </style>
